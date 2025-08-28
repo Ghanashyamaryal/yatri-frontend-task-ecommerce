@@ -7,7 +7,7 @@ import { twMerge } from "tailwind-merge";
 type InputSize = "sm" | "md" | "lg";
 
 const inputStyles = tv({
-  base: "w-full rounded-lg border bg-white text-gray-900 placeholder:text-gray-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 transition-colors",
+  base: "w-full rounded-lg border bg-white text-gray-900 placeholder:text-gray-400 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-brand-300 focus-visible:ring-offset-0 disabled:cursor-not-allowed disabled:opacity-50 transition-colors",
   variants: {
     size: {
       sm: "h-8 px-3 text-sm",
