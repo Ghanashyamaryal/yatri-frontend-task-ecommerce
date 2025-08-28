@@ -1,1 +1,15 @@
 @import "tailwindcss";
+
+@theme {
+  /* Brand purple palette */
+  --color-brand-50: #f4f0fa;
+  --color-brand-100: #e8def6;
+  --color-brand-200: #d7c4f0;
+  --color-brand-300: #bfa0e6;
+  --color-brand-400: #9f74d6;
+  --color-brand-500: #7f49c5;
+  --color-brand-600: #4b1d7a; 
+  --color-brand-700: #3f1768; 
+  --color-brand-800: #361358;
+  --color-brand-900: #2a0f46;
+}
