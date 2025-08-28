@@ -10,6 +10,27 @@
   --color-brand-500: #7f49c5;
   --color-brand-600: #4b1d7a; 
   --color-brand-700: #3f1768; 
-  --color-brand-800: #361358;
+  --color-brand-800: #361358; 
   --color-brand-900: #2a0f46;
+  
+  --color-brand-450: #8b5bb8;
+  --color-brand-550: #5f2a8f;
+  --color-brand-650: #3f1768;
+  
+  --color-grayscale-0: #fafafa;
+  --color-grayscale-25: #f7f7f7;
+  --color-grayscale-50: #f0f0f0;
+  --color-grayscale-100: #e5e5e5;
+  --color-grayscale-200: #e0e0e0;
+  --color-grayscale-300: #d6d6d6;
+  --color-grayscale-400: #cccccc;
+  --color-grayscale-500: #c2c2c2;
+  --color-grayscale-600: #bbbbbb;
+  --color-grayscale-700: #8d8d8d;
+  --color-grayscale-800: #424242;
+  --color-grayscale-850: #212121;
+  --color-grayscale-900: #101010;
+  --color-grayscale-950: #0a0a0a;
+  
+  --font-overused-grotesk: "Overused Grotesk", sans-serif;
 }
