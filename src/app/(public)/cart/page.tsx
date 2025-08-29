@@ -2,16 +2,17 @@
 
 import { useSelector } from "react-redux";
 import type { RootState } from "@/store";
-import Image from "next/image";
 import { removeItem, updateQuantity } from "@/store/cartSlice";
 import { useAppDispatch } from "@/store";
 import Button from "@/components/ui/atoms/Button";
-import { Trash2, Minus, Plus, ShoppingBag } from "lucide-react";
+import { ShoppingBag } from "lucide-react";
 import { useSession } from "next-auth/react";
 import OrderSummary from "./_components/OrderSummary";
 import CartItemCard from "./_components/CartItemCard";
+import { useProtectedRoute } from "@/hooks/useProtectedRoute";
 
 export default function CartPage() {
+  const status = useProtectedRoute();
   const dispatch = useAppDispatch();
   const { data: session } = useSession();
   const items = useSelector((s: RootState) => s.cart.items);
@@ -36,7 +37,7 @@ export default function CartPage() {
             Your cart is empty
           </h2>
           <p className="mb-8 text-base text-grayscale-700">
-            Looks like you haven't added any items to your cart yet.
+            Looks like you have not added any items to your cart yet.
           </p>
           <Button
             text="Start Shopping"
@@ -48,6 +49,9 @@ export default function CartPage() {
         </div>
       </main>
     );
+  }
+  if (status !== "authenticated") {
+    return null;
   }
 
   return (
