@@ -1,7 +1,6 @@
 @import "tailwindcss";
 
 @theme {
-  /* Brand purple palette */
   --color-brand-50: #f4f0fa;
   --color-brand-100: #e8def6;
   --color-brand-200: #d7c4f0;

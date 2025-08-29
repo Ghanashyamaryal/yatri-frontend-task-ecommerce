@@ -3,88 +3,121 @@
 import { useSelector } from "react-redux";
 import type { RootState } from "@/store";
 import Image from "next/image";
-import { removeItem, updateQuantity } from "@/store/cartSlice";
+import { removeItem, updateQuantity, clearCart } from "@/store/cartSlice";
 import { useAppDispatch } from "@/store";
-import Button from "@/components/ui/atoms/Button";
-import { Trash2, Minus, Plus, ShoppingBag } from "lucide-react";
-import { useSession } from "next-auth/react";
-import OrderSummary from "./_components/OrderSummary";
-import CartItemCard from "./_components/CartItemCard";
+import Link from "next/link";
 
 export default function CartPage() {
   const dispatch = useAppDispatch();
-  const { data: session } = useSession();
   const items = useSelector((s: RootState) => s.cart.items);
   const list = Object.values(items);
 
   const totalItems = list.reduce((acc, item) => acc + item.quantity, 0);
-  const subtotal = list.reduce(
+  const totalPrice = list.reduce(
     (acc, item) => acc + item.quantity * item.price,
     0
   );
-  const tax = subtotal * 0.1;
-  const total = subtotal + tax;
 
   if (list.length === 0) {
     return (
-      <main className="mx-auto max-w-4xl px-4 py-16">
-        <div className="flex flex-col items-center justify-center text-center">
-          <div className="mb-6 flex h-24 w-24 items-center justify-center rounded-full bg-[--color-brand-100] shadow-sm">
-            <ShoppingBag className="h-12 w-12 text-[--color-grayscale-800]" />
-          </div>
-          <h2 className="mb-2 text-2xl font-bold text-[--color-grayscale-850]">
-            Your cart is empty
-          </h2>
-          <p className="mb-8 text-base text-grayscale-700">
-            Looks like you haven't added any items to your cart yet.
-          </p>
-          <Button
-            text="Start Shopping"
-            size="lg"
-            theme="primary"
-            leftIcon={<ShoppingBag className="h-5 w-5" />}
-            onClick={() => (window.location.href = "/")}
-          />
-        </div>
+      <main className="mx-auto max-w-4xl px-4 py-8">
+        <h2 className="text-2xl font-semibold">Your Cart</h2>
+        <p className="mt-6 text-gray-600">Your cart is empty.</p>
+        <Link
+          href="/"
+          className="mt-4 inline-block rounded bg-gray-900 px-4 py-2 text-white hover:bg-black"
+        >
+          Continue Shopping
+        </Link>
       </main>
     );
   }
 
   return (
-    <div className="w-full py-8 px-4">
-      <div className="mx-auto w-full max-w-[1400px]">
-        <div className="mb-8 flex flex-col gap-2">
-          <h1 className="text-3xl font-bold text-[grayscale-850">
-            Shopping Cart
-          </h1>
-          <p className=" text-base text-grayscale-700">
-            {totalItems} {totalItems === 1 ? "item" : "items"} in your cart
-          </p>
-        </div>
+    <div className="mx-auto max-w-5xl px-4 py-8">
+      <div className="flex items-center justify-between">
+        <h1 className="text-2xl font-semibold">Your Cart</h1>
+        <button
+          onClick={() => dispatch(clearCart())}
+          className="text-sm text-red-600 hover:underline"
+        >
+          Clear cart
+        </button>
+      </div>
 
-        <div className="grid gap-8 lg:grid-cols-[1fr_400px]">
-          <div className="space-y-4">
-            {list.map((item) => (
-              <CartItemCard
-                key={item.id}
-                item={item}
-                onUpdateQuantity={(quantity) =>
-                  dispatch(updateQuantity({ id: item.id, quantity }))
-                }
-                onRemove={() => dispatch(removeItem({ id: item.id }))}
-              />
-            ))}
+      <div className="mt-6 grid gap-6 md:grid-cols-[1fr_22rem]">
+        <ul className="space-y-4">
+          {list.map((item) => (
+            <li
+              key={item.id}
+              className="grid grid-cols-[5rem_1fr_auto] items-center gap-4 rounded border bg-white p-3"
+            >
+              <div className="relative h-20 w-20 overflow-hidden rounded bg-gray-50">
+                <Image
+                  src={item.image}
+                  alt={item.title}
+                  fill
+                  className="object-contain"
+                />
+              </div>
+              <div>
+                <p className="text-sm font-medium line-clamp-2">{item.title}</p>
+                <p className="mt-1 text-sm text-gray-600">
+                  ${item.price.toFixed(2)}
+                </p>
+                <div className="mt-2 inline-flex items-center gap-2">
+                  <button
+                    onClick={() =>
+                      dispatch(
+                        updateQuantity({
+                          id: item.id,
+                          quantity: item.quantity - 1,
+                        })
+                      )
+                    }
+                    className="h-8 w-8 rounded border"
+                  >
+                    -
+                  </button>
+                  <span className="w-8 text-center">{item.quantity}</span>
+                  <button
+                    onClick={() =>
+                      dispatch(
+                        updateQuantity({
+                          id: item.id,
+                          quantity: item.quantity + 1,
+                        })
+                      )
+                    }
+                    className="h-8 w-8 rounded border"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+              <button
+                onClick={() => dispatch(removeItem({ id: item.id }))}
+                className="text-sm text-red-600 hover:underline"
+              >
+                Remove
+              </button>
+            </li>
+          ))}
+        </ul>
+
+        <aside className="rounded border bg-white p-4 h-fit">
+          <h2 className="text-lg font-semibold">Summary</h2>
+          <div className="mt-3 text-sm text-gray-700">Items: {totalItems}</div>
+          <div className="mt-1 text-base font-bold">
+            Total: ${totalPrice.toFixed(2)}
           </div>
-          <div className="h-fit">
-            <OrderSummary
-              subtotal={subtotal}
-              totalItems={totalItems}
-              tax={tax}
-              total={total}
-              isAuthenticated={!!session}
-            />
-          </div>
-        </div>
+          <Link
+            href="/checkout"
+            className="mt-4 inline-flex w-full items-center justify-center rounded bg-gray-900 px-4 py-2 text-white hover:bg-black"
+          >
+            Go to Checkout
+          </Link>
+        </aside>
       </div>
     </div>
   );

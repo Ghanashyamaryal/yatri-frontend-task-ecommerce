@@ -2,10 +2,11 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store";
 import { Menu, X, Home, ShoppingCart, CreditCard, User } from "lucide-react";
+import Button from "../ui/atoms/Button";
 
 const links = [
   { href: "/", label: "Home", icon: Home },
@@ -17,6 +18,7 @@ const links = [
 export default function MobileNav() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
+  const router = useRouter();
 
   const cartItems = useSelector((state: RootState) => state.cart.items);
   const cartItemCount = Object.values(cartItems).reduce(
@@ -25,7 +27,7 @@ export default function MobileNav() {
   );
 
   return (
-    <div className="md:hidden border-b border-gray-200 bg-white shadow-sm">
+    <div className="xl:hidden border-b border-gray-200 bg-white shadow-sm">
       <div className="flex items-center justify-between p-4">
         <Link href="/" className="flex items-center gap-2">
           <div className="w-8 h-8 rounded-full bg-brand-600 flex items-center justify-center">
@@ -78,9 +80,11 @@ export default function MobileNav() {
           })}
 
           <div className="mt-4 pt-4 border-t border-gray-200">
-            <button className="w-full bg-gradient-to-r from-brand-600 to-brand-500 text-white py-3 px-4 rounded-lg font-medium hover:from-brand-700 hover:to-brand-600 transition-all duration-200 shadow-md">
-              Sign In
-            </button>
+            <Button
+              text="Sign In"
+              onClick={() => router.push("/login")}
+              className="w-full"
+            />
           </div>
         </nav>
       )}
