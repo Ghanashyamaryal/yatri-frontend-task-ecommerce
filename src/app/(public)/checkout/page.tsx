@@ -7,7 +7,6 @@ import { useForm, Controller } from "react-hook-form";
 import Button from "@/components/ui/atoms/Button";
 import Input from "@/components/ui/atoms/Input";
 import { CheckCircle, CreditCard, Package } from "lucide-react";
-import toast from "react-hot-toast";
 import RadioGroup from "@/components/ui/atoms/RadioGroup";
 import { useProtectedRoute } from "@/hooks/useProtectedRoute";
 
@@ -33,7 +32,6 @@ export default function CheckoutPage() {
   const subtotal = list.reduce((acc, it) => acc + it.price * it.quantity, 0);
   const tax = subtotal * 0.1;
   const total = subtotal + tax;
-  if (status !== "authenticated") return null;
 
   const {
     control,
@@ -56,6 +54,10 @@ export default function CheckoutPage() {
       cvv: "",
     },
   });
+
+  if (status !== "authenticated") {
+    return null;
+  }
 
   const paymentMethod = watch("paymentMethod");
 
