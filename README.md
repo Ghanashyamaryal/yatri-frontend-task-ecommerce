@@ -1,36 +1,83 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Yatri Frontend Task - Mini E‑Commerce Store built with Next.js 15, Tailwind, Redux Toolkit, Typescript, Mantine, Redux Persist, and NextAuth.
 
 ## Getting Started
 
-First, run the development server:
+1. Install dependencies
+
+```bash
+npm install
+```
+
+2. Create a .env.local file with OAuth credentials
+
+```bash
+NEXTAUTH_URL=http://localhost:3000
+NEXTAUTH_SECRET=replace-with-random-string
+
+GOOGLE_CLIENT_ID=...
+GOOGLE_CLIENT_SECRET=...
+GITHUB_ID=...
+GITHUB_SECRET=...
+```
+
+3. Run the dev server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Features
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- OAuth login (Google/GitHub) via NextAuth
+- Protected checkout route; unauthenticated users redirected to /login
+- Product list from Fake Store API with grid, images, prices
+- Product detail page with Add to Cart and toast
+- Cart with add/remove/update quantity, totals, persisted across refresh
+- Responsive Sidebar and Mobile navigation with active highlighting
+- Toast notifications via react-hot-toast
+  -Handle form using react hook form
+- Add typsescript for type saftey
+  -Mantine for componant library
 
-## Learn More
+##used Tech Stack are
 
-To learn more about Next.js, take a look at the following resources:
+Nextjs
+TypeScript
+Tailwind
+NextAuth
+Redux
+Mantine
+React hook form
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+src/
+  app/
+    (public)/
+      cart/
+      login/
+      products/[id]/
+      checkout/
+    api/auth/[...nextauth]/route.ts
+    layout.tsx, page.tsx
+  components/
+    layout/Sidebar.tsx, MobileNav.tsx
+    Providers.tsx
+    ui/molecules/{ProductCard,Skeleton,Loader}.tsx
+  store/{index.ts,cartSlice.ts}
+  services/products.ts
+  hooks/useProtectedRoute.ts
+```
 
-## Deploy on Vercel
+## Deploy
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Push to a GitHub repo named `yatri-frontend-task-ecommerce`
+- Deploy to Vercel; set the same env vars in the Vercel project
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Notes
+
+- Tailwind v4 via @import "tailwindcss" in globals.css
+- No database required; products come from fakestoreapi.com
