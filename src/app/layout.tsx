@@ -36,7 +36,7 @@ export default function RootLayout({
         <Providers>
           <MobileNav />
           <Header />
-          <div className="mx-auto max-w-[1520px]">
+          <div className="mx-auto max-w-[1400px]">
             <Sidebar />
             <div className="md:ml-56 pt-4 pb-20 md:pt-6 md:pb-28 px-6 md:px-6 min-h-[calc(100dvh-3.5rem)]">
               {children}
