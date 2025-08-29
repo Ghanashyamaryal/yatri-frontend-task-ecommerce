@@ -5,7 +5,7 @@ import { fetchProducts } from "@/services/products";
 import ProductCard from "@/components/ui/molecules/ProductCard";
 import SkeletonCard from "@/components/ui/molecules/Skeleton";
 import Button from "@/components/ui/atoms/Button";
-import Pagination from "@/components/ui/molecules/Pagination"; // Import your new pagination
+import Pagination from "@/components/ui/molecules/Pagination";
 import type { Product } from "@/services/products";
 
 const PRODUCTS_PER_PAGE = 8;
@@ -98,12 +98,12 @@ export default function Home() {
   }
 
   return (
-    <main className="mx-auto max-w-[1400px] px-6 py-8">
+    <main className="mx-auto max-w-[1400px] md:p-2 xl:px-6 xl:py-8">
       <div className="text-center mb-12">
         <h1 className="text-2xl md:text-3xl xl:text-4xl font-bold text-gray-900 mb-2 xl:mb-4">
           Welcome to Aryal Store
         </h1>
-        <p className="text-base xl:text-xl text-gray-600 max-w-2xl mx-auto">
+        <p className="text-xs xl:text-xl text-gray-600 max-w-2xl mx-auto">
           Discover amazing products at unbeatable prices
         </p>
       </div>
