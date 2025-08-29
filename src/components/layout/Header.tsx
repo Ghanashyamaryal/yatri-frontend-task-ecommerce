@@ -11,6 +11,7 @@ import { Search, ShoppingCart } from "lucide-react";
 import { RootState } from "@/store";
 import Input from "@/components/ui/atoms/Input";
 import Button from "../ui/atoms/Button";
+import { useSession, signOut } from "next-auth/react";
 
 export default function Header() {
   const [query, setQuery] = useState("");
@@ -20,6 +21,7 @@ export default function Header() {
   const [isSearching, setIsSearching] = useState(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
   const router = useRouter();
+  const { data: session, status } = useSession();
 
   const cartItems = useSelector((state: RootState) => state.cart.items);
   const cartItemCount = Object.values(cartItems).reduce(
@@ -145,7 +147,11 @@ export default function Header() {
               </span>
             )}
           </Link>
-          <Button text="Sign In" onClick={() => router.push("/login")} />
+          {session ? (
+            <Button text="Logout" onClick={() => signOut()} />
+          ) : (
+            <Button text="Sign In" onClick={() => router.push("/login")} />
+          )}
         </div>
       </div>
     </header>
