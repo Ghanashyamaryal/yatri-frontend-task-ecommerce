@@ -42,8 +42,8 @@ export default function Sidebar() {
 
   return (
     <aside
-      className={`hidden md:block fixed left-0 bottom-0 top-14 transition-all duration-300 ease-in-out ${
-        isCollapsed ? "w-20" : "w-64"
+      className={`hidden xl:block fixed left-0 bottom-0 top-14 transition-all duration-300 ease-in-out ${
+        isCollapsed ? "w-22" : "w-64"
       } bg-white border-r border-gray-200 shadow-sm`}
     >
       <div className="p-4 border-b border-gray-200">
@@ -71,7 +71,7 @@ export default function Sidebar() {
           </div>
           <button
             onClick={toggleSidebar}
-            className="p-1 rounded-full hover:bg-gray-100 transition-colors"
+            className="absolute top-7 cursor-pointer -right-3 transform -translate-y-1/2 p-1 rounded-full bg-white border border-gray-200 shadow hover:bg-gray-100 transition-colors z-10"
           >
             {isCollapsed ? (
               <ChevronRight className="w-6 h-6 text-gray-600" />

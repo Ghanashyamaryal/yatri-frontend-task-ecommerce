@@ -76,7 +76,7 @@ export default function Header() {
     <header className="hidden xl:block sticky top-0 z-40 border-b border-gray-200 bg-white shadow-sm w-full ">
       <div className="w-full flex h-16 items-center justify-between gap-6 px-6 mx-auto max-w-[1400px]">
         <Link href="/" className="flex items-center gap-2 flex-shrink-0">
-          <span className="text-brand-600 font-bold text-xl">Anjan Store</span>
+          <span className="text-brand-600 font-bold text-xl">Aryal Store</span>
         </Link>
 
         <div className="flex-1 max-w-[400px] relative" ref={dropdownRef}>
