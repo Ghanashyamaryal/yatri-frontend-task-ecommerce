@@ -4,7 +4,6 @@ import ProductCard from "@/components/ui/molecules/ProductCard";
 import SkeletonCard from "@/components/ui/molecules/Skeleton";
 import Button from "@/components/ui/atoms/Button";
 import type { Product } from "@/services/products";
-import Link from "next/link";
 
 function ProductGrid({ products }: { products: Product[] }) {
   return (
@@ -27,8 +26,6 @@ function LoadingSkeleton() {
 }
 
 export default async function Home() {
-  const perPage = 8;
-
   try {
     const products = await fetchProducts();
 

@@ -56,7 +56,7 @@ export default function ProductPage() {
             Product not found
           </h1>
           <p className="mt-2 text-gray-600">
-            The product you're looking for doesn’t exist.
+            The product you&apos;re looking for doesn&apos;t exist.
           </p>
         </div>
       </main>
@@ -80,7 +80,6 @@ export default function ProductPage() {
           />
         </div>
 
-        {/* Thumbnails */}
         {product.images?.length > 1 && (
           <div className="flex gap-3 mt-4">
             {product.images.map((img: string, idx: number) => (
@@ -105,7 +104,6 @@ export default function ProductPage() {
         )}
       </div>
 
-      {/* Right side - Info */}
       <div className="flex flex-col justify-between space-y-6">
         <div>
           <h1 className="text-3xl font-bold text-gray-900">{product.title}</h1>
@@ -165,8 +163,9 @@ export default function ProductPage() {
             </p>
             <p>
               <span className="font-semibold">Dimensions:</span>{" "}
-              {product.dimensions?.width} × {product.dimensions?.height} ×{" "}
-              {product.dimensions?.depth} cm
+              {product.dimensions
+                ? `${product.dimensions.width} * ${product.dimensions.height} * ${product.dimensions.depth} cm`
+                : "N/A"}
             </p>
             <p>
               <span className="font-semibold">Warranty:</span>{" "}

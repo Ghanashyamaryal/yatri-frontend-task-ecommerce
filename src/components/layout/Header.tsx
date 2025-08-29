@@ -44,6 +44,7 @@ export default function Header() {
           setOpen(true);
         }
       } catch (error) {
+        console.log(error);
         if (!ignore) {
           setResults([]);
           setOpen(false);
