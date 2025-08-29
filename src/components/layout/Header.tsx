@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import { Search, ShoppingCart } from "lucide-react";
 import { RootState } from "@/store";
 import Input from "@/components/ui/atoms/Input";
+import Button from "../ui/atoms/Button";
 
 export default function Header() {
   const [query, setQuery] = useState("");
@@ -136,16 +137,14 @@ export default function Header() {
             href="/cart"
             className="relative p-2 rounded-lg hover:bg-gray-100 transition-colors"
           >
-            <ShoppingCart className="w-6 h-6 text-gray-600" />
+            <ShoppingCart className="w-6 h-6 text-gray-400" />
             {cartItemCount > 0 && (
               <span className="absolute -top-1 -right-1 bg-brand-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
                 {cartItemCount > 99 ? "99+" : cartItemCount}
               </span>
             )}
           </Link>
-          <button className="bg-gradient-to-r from-brand-600 to-brand-500 text-white py-2.5 px-4 rounded-lg font-medium hover:from-brand-700 hover:to-brand-600 transition-all duration-200 shadow-md">
-            Sign In
-          </button>
+          <Button text="Sign In" onClick={() => router.push("/login")} />
         </div>
       </div>
     </header>

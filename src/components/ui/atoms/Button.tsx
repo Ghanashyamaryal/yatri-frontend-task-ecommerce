@@ -15,7 +15,7 @@ const buttonStyles = tv({
     },
     theme: {
       primary:
-        "bg-brand-600 text-white hover:bg-brand-700 active:bg-[--color-brand-800] focus-visible:ring-brand-600",
+        "bg-gradient-to-r from-brand-600 to-brand-500 text-white hover:from-brand-700 hover:to-brand-600 transition-all duration-200 shadow-md active:bg-[--color-brand-800] focus-visible:ring-brand-600",
       secondary:
         "bg-white text-brand-600 border border-[#e5e7eb] hover:bg-[#f8f7fc] active:bg-[#f2eff9] focus-visible:ring-brand-600",
       destructive:
