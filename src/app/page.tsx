@@ -7,7 +7,6 @@ import SkeletonCard from "@/components/ui/molecules/Skeleton";
 import Button from "@/components/ui/atoms/Button";
 import Pagination from "@/components/ui/molecules/Pagination";
 import type { Product } from "@/services/products";
-
 const PRODUCTS_PER_PAGE = 8;
 
 function ProductGrid({ products }: { products: Product[] }) {
