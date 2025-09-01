@@ -18,7 +18,7 @@ function CartItemCard({ item, onUpdateQuantity, onRemove }: CartItemCardProps) {
   const totalPrice = item.price * item.quantity;
 
   return (
-    <div className="rounded-lg  p-6 shadow-sm border border-brand-400 bg-brand-50">
+    <div className="rounded-lg p-6 shadow-sm border border-brand-400 bg-brand-50">
       <div className="flex gap-4">
         <div className="relative h-24 w-30 flex-shrink-0 overflow-hidden rounded-lg bg-white">
           <Image
