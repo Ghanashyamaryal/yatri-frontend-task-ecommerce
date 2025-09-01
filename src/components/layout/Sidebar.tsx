@@ -13,6 +13,7 @@ import {
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
+import { useSession } from "next-auth/react";
 
 const links = [
   { href: "/", label: "Home", icon: Home },
@@ -21,15 +22,13 @@ const links = [
   { href: "/login", label: "Profile", icon: User },
 ];
 
-//dummy data will be replace later
-const user = {
-  name: "Ghanashyam Aryal",
-  email: "ghanashyamaryal9@gmail.com",
-};
-
 export default function Sidebar() {
   const pathname = usePathname();
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const { data: session } = useSession();
+  const profileImage = session?.user?.image || null;
+  const profileName = session?.user?.name || "Guest User";
+  const profileEmail = session?.user?.email || "guest@example.com";
 
   // Get cart items from Redux store
   const cartItems = useSelector((state: RootState) => state.cart.items);
@@ -53,19 +52,28 @@ export default function Sidebar() {
           }`}
         >
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-brand-500 flex items-center justify-center">
-              <span className="text-white font-bold text-lg">
-                {user.name.charAt(0).toUpperCase()}
-              </span>
+            <div className="w-10 h-10 rounded-full bg-brand-500 flex items-center justify-center overflow-hidden">
+              {profileImage ? (
+                <img
+                  src={profileImage}
+                  alt="Profile"
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <User className="w-6 h-6 text-white" />
+              )}
             </div>
+
             {!isCollapsed && (
               <div className="flex flex-col overflow-hidden">
                 <span className="text-gray-900 font-medium truncate">
-                  {user.name}
+                  {profileName}
                 </span>
-                <span className="text-gray-500 text-xs truncate">
-                  {user.email}
-                </span>
+                {profileEmail && (
+                  <span className="text-gray-500 text-xs truncate">
+                    {profileEmail}
+                  </span>
+                )}
               </div>
             )}
           </div>

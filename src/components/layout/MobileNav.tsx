@@ -33,7 +33,7 @@ export default function MobileNav() {
           <div className="w-8 h-8 rounded-full bg-brand-600 flex items-center justify-center">
             <span className="text-white font-bold text-sm">P</span>
           </div>
-          <span className="text-brand-600 font-bold text-lg">Purple Store</span>
+          <span className="text-brand-600 font-bold text-lg">Aryal Store</span>
         </Link>
 
         <button
